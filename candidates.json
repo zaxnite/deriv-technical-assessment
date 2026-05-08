@@ -1,0 +1,32 @@
+[
+  {
+    "id": "C1",
+    "name": "Aisha Okonkwo",
+    "summary": "7 years backend engineering. Python and Go. Built real-time trade execution engine at Lagos fintech startup handling 50k req/s. Kafka, PostgreSQL, Redis. Led team of 4. No degree listed."
+  },
+  {
+    "id": "C2",
+    "name": "James Whitfield",
+    "summary": "6 years at Goldman Sachs and Barclays. Java primary language, some Python. Equity derivatives pricing systems. Low-latency focus. Oxford CS degree. No WebSocket experience listed."
+  },
+  {
+    "id": "C3",
+    "name": "Mei-Lin Zhang",
+    "summary": "4 years experience. Python expert. Contributed to 3 open source trading libraries. PostgreSQL, MongoDB. Built WebSocket data pipeline for crypto exchange. Currently at early-stage startup."
+  },
+  {
+    "id": "C4",
+    "name": "Dmitri Volkov",
+    "summary": "8 years. Go and Rust. Kubernetes expert. High-frequency trading infrastructure at prop trading firm. Redis, Kafka, ClickHouse. No fintech regulatory experience noted."
+  },
+  {
+    "id": "C5",
+    "name": "Priya Nair",
+    "summary": "5 years backend. Python and TypeScript. Payments infrastructure at Razorpay — 100k transactions/day. PostgreSQL, Docker. MBA + CS degree. Strong communication skills noted by referees."
+  },
+  {
+    "id": "C6",
+    "name": "Tom Henderson",
+    "summary": "10 years. Mostly Java, learning Go. Senior engineer at Google then Meta. Strong system design. No financial domain experience. Kubernetes, Cassandra. FAANG background prominent in CV framing."
+  }
+]

@@ -1,0 +1,594 @@
+{
+  "rubric_reference": "artifacts\\scoring_rubric.json",
+  "scoring_stage": "CANDIDATES_SCORED",
+  "original_scores": [
+    {
+      "candidate_id": "C1",
+      "candidate_name": "Aisha Okonkwo",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 9,
+          "rationale": "7 years of backend engineering with clear senior-level progression demonstrated by leading a team of 4 engineers and owning a critical real-time trade execution system."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 9,
+          "rationale": "Built and maintained a trade execution engine handling 50k requests per second, demonstrating hands-on experience with high-frequency, low-latency production systems."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 9,
+          "rationale": "Proven production experience building a trade execution engine at a fintech startup, directly addressing core trading infrastructure requirements."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Demonstrated experience with Kafka message broker in production trade execution system, indicating strong event-driven architecture knowledge, though WebSocket experience not explicitly mentioned."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 9,
+          "rationale": "Proficient in both Python and Go with substantial production systems built and maintained in both languages at trading infrastructure scale."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 7,
+          "rationale": "Demonstrated production experience with PostgreSQL, Redis, and Kafka, but Docker and Kubernetes experience not explicitly mentioned."
+        }
+      ],
+      "total_weighted_score": 8.54
+    },
+    {
+      "candidate_id": "C2",
+      "candidate_name": "James Whitfield",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 8,
+          "rationale": "6 years of backend engineering at prestigious institutions (Goldman Sachs, Barclays) indicates senior-level experience, though specific team leadership or mentoring not mentioned."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 8,
+          "rationale": "Explicit low-latency focus in equity derivatives pricing systems at tier-1 financial institutions suggests deep experience with performance-critical infrastructure."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 9,
+          "rationale": "6 years working on equity derivatives pricing and trading systems at Goldman Sachs and Barclays demonstrates strong production fintech experience in regulated environments."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 4,
+          "rationale": "No explicit mention of WebSocket protocols, message brokers, or event-driven architecture experience, which are core requirements for this criterion."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 4,
+          "rationale": "Java listed as primary language with only some Python experience, not meeting the requirement for demonstrated strong proficiency in Python or Go."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 3,
+          "rationale": "No mention of PostgreSQL, NoSQL databases, Docker, or Kubernetes experience in the candidate summary."
+        }
+      ],
+      "total_weighted_score": 6.28
+    },
+    {
+      "candidate_id": "C3",
+      "candidate_name": "Mei-Lin Zhang",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 5,
+          "rationale": "4 years of backend engineering experience falls short of the 5+ years expected for senior-level roles, with no mention of team leadership or critical system ownership."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 4,
+          "rationale": "No evidence of building or optimizing systems handling >10k requests per second or documented performance optimizations mentioned."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 6,
+          "rationale": "Contributed to trading libraries and built WebSocket pipeline for crypto exchange, showing domain familiarity but lacking production trading system ownership."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Built a WebSocket data pipeline for crypto exchange demonstrating practical experience with real-time data protocols and event-driven systems."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 9,
+          "rationale": "Noted as Python expert with substantial contributions to multiple trading libraries, demonstrating deep language expertise and production experience."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 6,
+          "rationale": "Hands-on experience with PostgreSQL and MongoDB mentioned, but no Docker or Kubernetes production experience documented."
+        }
+      ],
+      "total_weighted_score": 6.24
+    },
+    {
+      "candidate_id": "C4",
+      "candidate_name": "Dmitri Volkov",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 8,
+          "rationale": "8 years of backend engineering with specialized expertise in high-frequency trading infrastructure indicates strong senior-level experience and technical ownership."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 9,
+          "rationale": "Direct experience building high-frequency trading infrastructure at a prop trading firm directly demonstrates expertise in ultra-low-latency, high-throughput systems."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 8,
+          "rationale": "Extensive production experience at a proprietary trading firm building trading infrastructure, though lack of regulated fintech/exchange experience noted."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Demonstrated experience with Kafka and Redis in high-frequency trading context indicates strong event-driven and real-time data architecture expertise."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 8,
+          "rationale": "Proficient in Go and Rust with production high-frequency trading systems, meeting the requirement for strong proficiency in Go as a primary backend language."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 9,
+          "rationale": "Expert-level Kubernetes experience with production use of Redis, Kafka, and ClickHouse demonstrates strong hands-on expertise in containerization and data persistence."
+        }
+      ],
+      "total_weighted_score": 8.34
+    },
+    {
+      "candidate_id": "C5",
+      "candidate_name": "Priya Nair",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 7,
+          "rationale": "5 years of backend engineering meets the threshold for senior-level roles; strong communication noted by referees suggests leadership potential but specific team ownership not mentioned."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 5,
+          "rationale": "100k transactions per day translates to roughly 1 transaction per second, well below the >10k requests per second threshold for high-throughput systems experience."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 7,
+          "rationale": "Production experience building payments infrastructure at Razorpay demonstrates fintech system knowledge in regulated environment, though not specifically trading-focused."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 3,
+          "rationale": "No mention of WebSocket protocols, message brokers, event-driven architectures, or real-time data pipelines in candidate summary."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 7,
+          "rationale": "Proficient in Python with production backend systems, though TypeScript is also listed as primary language suggesting split focus rather than deep Go/Python specialization."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 6,
+          "rationale": "Hands-on experience with PostgreSQL and Docker mentioned, but no NoSQL database or Kubernetes production experience documented."
+        }
+      ],
+      "total_weighted_score": 5.88
+    },
+    {
+      "candidate_id": "C6",
+      "candidate_name": "Tom Henderson",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 9,
+          "rationale": "10 years of backend engineering with senior engineer roles at Google and Meta indicates extensive experience with critical system ownership and technical decision-making at scale."
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 8,
+          "rationale": "Strong system design background at Google and Meta implies experience with large-scale, high-throughput infrastructure, though specific trading domain performance optimization not mentioned."
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 1,
+          "rationale": "Explicitly noted as having no financial domain experience, which is a critical requirement for trading infrastructure role."
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 5,
+          "rationale": "No explicit mention of WebSocket protocols, message brokers, or event-driven architecture experience despite FAANG background."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 4,
+          "rationale": "Primarily a Java engineer currently learning Go, which does not meet the requirement for demonstrated strong proficiency in Python or Go as a primary backend language."
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 7,
+          "rationale": "Hands-on experience with Kubernetes and Cassandra in production environments, though no PostgreSQL or Docker experience explicitly mentioned."
+        }
+      ],
+      "total_weighted_score": 5.54
+    }
+  ],
+  "corrected_scores": [
+    {
+      "candidate_id": "C1",
+      "candidate_name": "Aisha Okonkwo",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 8,
+          "rationale": "7 years of backend engineering with demonstrated progression to senior level, evidenced by leading a team of 4 engineers.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 9,
+          "rationale": "Built real-time trade execution engine handling 50k req/s with production-grade infrastructure (Kafka, PostgreSQL, Redis), demonstrating hands-on high-throughput system optimization.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 9,
+          "rationale": "Direct production experience building a trade execution engine at a fintech startup, demonstrating proven trading platform expertise.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Demonstrated experience with Kafka message broker in production trade execution system, indicating strong event-driven architecture knowledge, though WebSocket experience not explicitly mentioned."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 8,
+          "rationale": "Demonstrated proficiency in both Python and Go with multiple production systems built and maintained in a high-frequency trading context.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 7,
+          "rationale": "Demonstrated production experience with PostgreSQL, Redis, and Kafka, but Docker and Kubernetes experience not explicitly mentioned."
+        }
+      ],
+      "total_weighted_score": 8.34
+    },
+    {
+      "candidate_id": "C2",
+      "candidate_name": "James Whitfield",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 7,
+          "rationale": "6 years of backend engineering experience across multiple employers with demonstrated focus on complex systems.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 6,
+          "rationale": "Has low-latency focus in equity derivatives pricing systems but no documented evidence of handling >10k req/s or specific performance optimization results.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 8,
+          "rationale": "Proven experience with equity derivatives pricing systems in production financial environments, demonstrating domain-specific expertise.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 4,
+          "rationale": "No explicit mention of WebSocket protocols, message brokers, or event-driven architecture experience, which are core requirements for this criterion."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 5,
+          "rationale": "Java is primary language with only some Python experience; does not demonstrate strong proficiency in Python or Go as required.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 3,
+          "rationale": "No mention of PostgreSQL, NoSQL databases, Docker, or Kubernetes experience in the candidate summary."
+        }
+      ],
+      "total_weighted_score": 5.88
+    },
+    {
+      "candidate_id": "C3",
+      "candidate_name": "Mei-Lin Zhang",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 5,
+          "rationale": "4 years of backend engineering experience falls short of the 5+ year threshold for senior-level responsibilities.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 6,
+          "rationale": "Built WebSocket data pipeline for crypto exchange indicating real-time system experience, but no documentation of handling >10k req/s or specific throughput metrics.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 7,
+          "rationale": "Contributed to trading libraries and built WebSocket pipeline for crypto exchange, demonstrating trading domain familiarity but limited production trading platform experience.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Built a WebSocket data pipeline for crypto exchange demonstrating practical experience with real-time data protocols and event-driven systems."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 8,
+          "rationale": "Identified as Python expert with contributions to multiple trading libraries, demonstrating deep expertise in Python.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 6,
+          "rationale": "Hands-on experience with PostgreSQL and MongoDB mentioned, but no Docker or Kubernetes production experience documented."
+        }
+      ],
+      "total_weighted_score": 6.6
+    },
+    {
+      "candidate_id": "C4",
+      "candidate_name": "Dmitri Volkov",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 8,
+          "rationale": "8 years of backend engineering with high-frequency trading infrastructure expertise demonstrates senior-level experience and critical system ownership.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 9,
+          "rationale": "High-frequency trading infrastructure experience at prop trading firm with Redis and Kafka demonstrates hands-on expertise in extreme low-latency and high-throughput systems.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 8,
+          "rationale": "Direct production experience in high-frequency trading infrastructure at a prop trading firm demonstrates proven trading domain expertise, though regulatory experience is not noted.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 8,
+          "rationale": "Demonstrated experience with Kafka and Redis in high-frequency trading context indicates strong event-driven and real-time data architecture expertise."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 7,
+          "rationale": "Strong Go proficiency demonstrated with high-frequency trading systems; Rust also listed, indicating multiple systems built in compiled languages suitable for low-latency work.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 9,
+          "rationale": "Expert-level Kubernetes experience with production use of Redis, Kafka, and ClickHouse demonstrates strong hands-on expertise in containerization and data persistence."
+        }
+      ],
+      "total_weighted_score": 8.18
+    },
+    {
+      "candidate_id": "C5",
+      "candidate_name": "Priya Nair",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 6,
+          "rationale": "5 years of backend engineering experience meets the minimum threshold, but no evidence of team leadership or mentoring junior engineers.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 5,
+          "rationale": "Payments infrastructure experience with 100k transactions/day is moderate scale but lacks evidence of >10k req/s throughput or low-latency optimization requirements.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 7,
+          "rationale": "Proven production experience with payments infrastructure in regulated financial environment, demonstrating financial systems knowledge though not trading-specific.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 3,
+          "rationale": "No mention of WebSocket protocols, message brokers, event-driven architectures, or real-time data pipelines in candidate summary."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 6,
+          "rationale": "Python proficiency demonstrated but TypeScript is also listed as primary backend language; does not show strong focus on Python or Go as primary backend language.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 6,
+          "rationale": "Hands-on experience with PostgreSQL and Docker mentioned, but no NoSQL database or Kubernetes production experience documented."
+        }
+      ],
+      "total_weighted_score": 5.44
+    },
+    {
+      "candidate_id": "C6",
+      "candidate_name": "Tom Henderson",
+      "criterion_scores": [
+        {
+          "criterion_id": "C1",
+          "criterion_name": "Backend Engineering Depth & Seniority",
+          "score": 9,
+          "rationale": "10 years of backend engineering with senior engineer title at established employers demonstrates extensive senior-level experience and technical leadership.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C2",
+          "criterion_name": "High-Throughput & Low-Latency System Experience",
+          "score": 7,
+          "rationale": "Strong system design expertise and FAANG background suggest experience with high-scale systems, though no specific evidence of >10k req/s throughput or low-latency constraints documented.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C3",
+          "criterion_name": "Financial Systems & Trading Domain Knowledge",
+          "score": 2,
+          "rationale": "No financial domain experience noted; background is primarily in technology companies without evidence of trading or financial systems exposure.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C4",
+          "criterion_name": "Real-Time Data & Async Architecture",
+          "score": 5,
+          "rationale": "No explicit mention of WebSocket protocols, message brokers, or event-driven architecture experience despite FAANG background."
+        },
+        {
+          "criterion_id": "C5",
+          "criterion_name": "Python or Go Proficiency",
+          "score": 4,
+          "rationale": "Java is primary language with Go currently being learned; does not demonstrate established strong proficiency in Python or Go.",
+          "rescored": true
+        },
+        {
+          "criterion_id": "C6",
+          "criterion_name": "Data Persistence & Containerization Stack",
+          "score": 7,
+          "rationale": "Hands-on experience with Kubernetes and Cassandra in production environments, though no PostgreSQL or Docker experience explicitly mentioned."
+        }
+      ],
+      "total_weighted_score": 5.68
+    }
+  ],
+  "bias_audit_status": "COMPLETE",
+  "flagged_criteria": [
+    "C1",
+    "C2",
+    "C3",
+    "C5"
+  ],
+  "final_ranking": [
+    {
+      "rank": 1,
+      "candidate_id": "C1",
+      "candidate_name": "Aisha Okonkwo",
+      "total_weighted_score": 8.34
+    },
+    {
+      "rank": 2,
+      "candidate_id": "C4",
+      "candidate_name": "Dmitri Volkov",
+      "total_weighted_score": 8.18
+    },
+    {
+      "rank": 3,
+      "candidate_id": "C3",
+      "candidate_name": "Mei-Lin Zhang",
+      "total_weighted_score": 6.6
+    },
+    {
+      "rank": 4,
+      "candidate_id": "C2",
+      "candidate_name": "James Whitfield",
+      "total_weighted_score": 5.88
+    },
+    {
+      "rank": 5,
+      "candidate_id": "C6",
+      "candidate_name": "Tom Henderson",
+      "total_weighted_score": 5.68
+    },
+    {
+      "rank": 6,
+      "candidate_id": "C5",
+      "candidate_name": "Priya Nair",
+      "total_weighted_score": 5.44
+    }
+  ],
+  "rescoring_occurred": true
+}

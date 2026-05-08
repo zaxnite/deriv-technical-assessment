@@ -1,0 +1,111 @@
+{
+  "audit_summary": "This audit identifies multiple instances of credential and employer-brand bias that inflate scores for candidates with prestigious institutional backgrounds (FAANG, Goldman Sachs, Oxford) while potentially underweighting demonstrated hands-on domain expertise. Geographic and credential-institution bias patterns are evident, particularly affecting C2 (Goldman Sachs/Oxford) and C6 (Google/Meta). Immediate re-scoring of C2, C4, and C6 is required.",
+  "findings": [
+    {
+      "bias_type": "Credential Institution & Employer Brand Bias (FAANG/Investment Banking)",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C1",
+        "C2"
+      ],
+      "evidence": "C6 (Google/Meta background) scored 9 in Backend Depth despite explicitly 'no financial domain experience' and only 4/10 in Python/Go proficiency (a weighted criterion). C2 (Goldman Sachs/Barclays/Oxford degree) scored 8 in Backend Depth and 8 in High-Throughput despite only 4/10 in Real-Time Async Architecture and 4/10 in Python/Go\u2014both critical to trading infrastructure. By contrast, C1 (Lagos fintech startup, no degree listed) with identical or superior practical experience (50k req/s engine, explicit Kafka/Redis expertise, 7 years) scores comparably or lower in some criteria despite stronger domain-specific evidence.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Geographic/Origin Bias in Credential Weighting",
+      "affected_candidates": [
+        "C1"
+      ],
+      "affected_criteria": [
+        "C1"
+      ],
+      "evidence": "C1 explicitly states 'no degree listed' but demonstrates 7 years of hands-on backend experience building production trading infrastructure (50k req/s). Despite this demonstrable seniority and outcomes, Backend Depth score (9) is equivalent to C6 (who has FAANG prestige but no financial domain experience). The absence of formal credential mention for C1 (likely reflecting non-Western institutional background given Lagos origin and African name) appears compensated for only by extremely high practical scores, whereas C6's FAANG background appears to have buffered weak domain and language proficiency scores. This suggests institutional prestige may be anchoring scorer expectations.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Domain Expertise Misweighting vs. Credential Prestige",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "evidence": "C2 scored 9/10 in Financial Systems & Trading Domain Knowledge (weight 0.2) despite working in equity derivatives (structurally different from trading execution infrastructure) and having no async/real-time architecture evidence. C6 scored 1/10 in the same criterion\u2014correctly reflecting zero financial domain experience\u2014yet still achieved 5.54 overall due to inflated Backend Depth (9) and High-Throughput scores (8) without evidence. By contrast, C1 (actual production trading engine builder) scored 9 in domain knowledge but only 8.54 overall, suggesting domain expertise alone cannot overcome credential disadvantage. C4 (8.34 overall) with explicit high-frequency trading experience is penalized compared to C2, suggesting HFT/prop trading is weighted lower than investment banking domain.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Language/Tech Stack Proficiency Bias Against Non-FAANG Candidates",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C5"
+      ],
+      "evidence": "C2 scored 4/10 in Python/Go proficiency (requirement weight 0.12, role explicitly asks for these languages) due to Java primary language and 'some Python'\u2014yet total score (6.28) not penalized proportionally. C6 scored 4/10 (Java, learning Go) and total still lands at 5.54. By contrast, C1 (9/10 in Python/Go, both languages proven in production) and C3 (9/10 Python) score appropriately. This suggests scorer applied leniency to FAANG candidates with non-required languages while penalizing those without FAANG credentials equally or more for the same gap.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Real-Time & Async Architecture Weighting Inconsistency",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C4"
+      ],
+      "evidence": "C2 (equity derivatives pricing, no WebSocket/async mentioned) scored 4/10 in Real-Time Data & Async Architecture (weight 0.18). C6 (10 years seniority, FAANG, strong systems design) scored 5/10 despite no fintech real-time experience noted. Yet C1 (explicit Kafka, event-driven trade execution engine) scored 8/10. C4 (HFT infrastructure, Redis/Kafka, async-native) scored 8/10. This inconsistency suggests FAANG seniority (C6) received +1 point buffer despite equivalent inexperience, while investment banking domain (C2) received score that penalizes appropriately but whose overall score was not adjusted downward proportionally.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Degree Prestige Implicit Weighting",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C1"
+      ],
+      "evidence": "C2 explicitly lists 'Oxford CS degree,' C6 implicitly represents FAANG educational pipeline (typical). Both scored 8-9 in Backend Depth despite C2 having inferior trading infrastructure experience and C6 having zero financial domain experience. C1 (no degree listed, Lagos background) also scored 9 but appears to be only candidate whose high score is directly justified by stated production outcomes. C5 (noted 'MBA + CS degree, strong communication') scored only 7 in Backend Depth despite 5 years experience, suggesting her degree (MBA, not pure CS prestige institution) and communication skills were noted but not weighted toward technical depth the way C2's Oxford or C6's implied FAANG educational background appear to have been.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Startup vs. Corporate Background Bias",
+      "affected_candidates": [
+        "C1",
+        "C3"
+      ],
+      "affected_criteria": [
+        "C1",
+        "C2"
+      ],
+      "evidence": "C1 (Lagos fintech startup, 50k req/s production system) and C3 (early-stage startup, crypto exchange WebSocket pipeline) both have pure startup backgrounds with strong technical outcomes, yet score lower on Backend Depth (9 vs. 5) and High-Throughput (9 vs. 4) relative to corporate-background candidates like C2 (Goldman Sachs/Barclays: 8/8) and C6 (Google/Meta: 9/8). C1's 50k req/s engine objectively exceeds C2's derivatives system in throughput, yet C2 scores equally (8/10). This suggests scorer may have applied implicit credibility discount to startup-origin candidates despite superior evidence.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Recency & Career Narrative Bias",
+      "affected_candidates": [
+        "C2"
+      ],
+      "affected_criteria": [
+        "C1",
+        "C2"
+      ],
+      "evidence": "C2's summary emphasizes 'Goldman Sachs and Barclays' (brand names) and 'low-latency focus' (narrative framing) without detailing specific systems, throughput, or latency metrics. Despite this narrative-heavy, evidence-light profile, scored 8/8 in Backend Depth and High-Throughput. By contrast, C1 provides concrete metrics (50k req/s) and technologies but scored on the same scale. C6's summary emphasizes 'Senior engineer at Google then Meta' and 'strong system design' (narrative claims) with no trading system specifics, yet received high Backend Depth (9) and High-Throughput (8) scores. This suggests employers' names and narrative framing were weighted beyond the technical evidence provided.",
+      "severity": "watch"
+    }
+  ],
+  "flagged_criteria_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C5"
+  ],
+  "requires_rescoring": true
+}

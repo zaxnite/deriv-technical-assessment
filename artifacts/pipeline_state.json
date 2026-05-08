@@ -1,0 +1,13 @@
+{
+  "current_stage": "SUMMARIES_GENERATED",
+  "started_at": "2026-05-08T14:26:11.816149+00:00",
+  "artifacts_dir": "artifacts",
+  "rubric_path": "artifacts\\scoring_rubric.json",
+  "scores_path": "artifacts\\candidate_scores.json",
+  "bias_audit_path": "artifacts\\bias_audit.json",
+  "hiring_summaries_path": "artifacts\\hiring_summaries.md",
+  "llm_calls_path": "artifacts\\llm_calls.jsonl",
+  "bias_flags_found": true,
+  "rescoring_required": true,
+  "current_stage_int": 7
+}

@@ -1,0 +1,26 @@
+{
+  "role": "Senior Backend Engineer — Trading Infrastructure",
+  "company": "Deriv",
+  "location": "Remote (APAC or Europe timezone)",
+  "requirements": [
+    "5+ years backend engineering experience",
+    "Strong proficiency in Python or Go",
+    "Experience with high-throughput, low-latency systems (>10k req/s)",
+    "Familiarity with financial systems, trading platforms, or payment processing",
+    "Experience with WebSocket or real-time data pipelines",
+    "Proficiency with PostgreSQL and at least one NoSQL database",
+    "Experience with containerisation (Docker/Kubernetes)",
+    "Ability to work in distributed, async-first teams"
+  ],
+  "nice_to_have": [
+    "Experience in regulated financial environments",
+    "Contributions to open source projects",
+    "Experience with event-driven architectures (Kafka, RabbitMQ)",
+    "Prior experience at a fintech or trading firm"
+  ],
+  "explicitly_not_required": [
+    "Degree from a specific institution",
+    "Specific nationality or language background",
+    "Experience at FAANG companies"
+  ]
+}
