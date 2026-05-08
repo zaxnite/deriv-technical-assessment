@@ -1,0 +1,47 @@
+{
+  "role": "Senior Backend Engineer \u2014 Trading Infrastructure",
+  "criteria": [
+    {
+      "id": "C1",
+      "name": "Backend Engineering Experience & Language Proficiency",
+      "weight": 0.2,
+      "description": "Demonstrates 5+ years of backend engineering experience with demonstrated expertise in Python, Go, or both at scale.",
+      "score_10_means": "10+ years of professional backend experience with production expertise in both Python and Go, or 7+ years deeply specialized in one language at senior level."
+    },
+    {
+      "id": "C2",
+      "name": "High-Throughput & Low-Latency Systems",
+      "weight": 0.2,
+      "description": "Proven experience designing, building, or operating systems handling >10k requests/second with documented latency optimization.",
+      "score_10_means": "Multiple shipped systems handling 100k+ req/s with sub-100ms p99 latencies, with documented architectural decisions and performance metrics."
+    },
+    {
+      "id": "C3",
+      "name": "Real-Time Data & WebSocket Infrastructure",
+      "weight": 0.18,
+      "description": "Hands-on experience building or maintaining WebSocket-based systems, real-time data pipelines, or event streaming architectures.",
+      "score_10_means": "Designed and deployed production WebSocket systems with experience in Kafka/RabbitMQ event-driven architectures handling real-time market or transactional data."
+    },
+    {
+      "id": "C4",
+      "name": "Financial Systems & Trading Domain Knowledge",
+      "weight": 0.17,
+      "description": "Direct experience working on trading platforms, payment processors, or regulated financial systems with understanding of domain-specific challenges.",
+      "score_10_means": "3+ years in fintech/trading infrastructure with demonstrable knowledge of order execution, settlement, compliance, or real-time pricing systems."
+    },
+    {
+      "id": "C5",
+      "name": "Data Persistence & Database Expertise",
+      "weight": 0.15,
+      "description": "Production proficiency with PostgreSQL and at least one NoSQL database (Redis, MongoDB, Cassandra, etc.) in high-throughput contexts.",
+      "score_10_means": "Expert-level PostgreSQL optimization (indexing, query tuning, replication) plus deep NoSQL experience; experience with database scaling under high load."
+    },
+    {
+      "id": "C6",
+      "name": "Containerization & Distributed Systems",
+      "weight": 0.1,
+      "description": "Practical experience deploying and managing containerized applications using Docker and Kubernetes in production environments.",
+      "score_10_means": "Shipped multiple services on Kubernetes with hands-on experience in networking, persistence, orchestration, and debugging distributed async systems."
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "audit_summary": "This audit identifies multiple significant bias patterns in the scoring that correlate with demographic signals rather than job-relevant criteria. Most notably, Financial Systems & Trading Domain Knowledge (C4) shows clear credential-based bias favoring prestigious employers and Western financial institutions, while Containerization & Distributed Systems (C6) appears to have FAANG-employer bias. Additionally, Real-Time Data & WebSocket Infrastructure (C3) scores show geographic/startup context bias that undervalues demonstrated expertise.",
+  "findings": [
+    {
+      "bias_type": "Credential/Employer Brand Bias \u2014 Financial Systems & Trading Domain Knowledge",
+      "affected_candidates": [
+        "C2",
+        "C4",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C4"
+      ],
+      "evidence": "James Whitfield (C2, Goldman Sachs & Barclays, Oxford degree) scored 8/10 despite listing NO WebSocket experience and only 'equity derivatives pricing' \u2014 a different asset class from trading infrastructure. Dmitri Volkov (C4, prop trading firm) scored 7/10 despite explicit high-frequency trading infrastructure expertise. Tom Henderson (C6, Google/Meta) scored only 1/10 with 'no financial domain experience' \u2014 yet this appears disproportionately harsh compared to C2's 8/10 for similar lack of trading execution specificity. Aisha Okonkwo (C1, Lagos fintech startup) scored 9/10 with explicit 'trade execution engine' experience \u2014 highest score \u2014 but is the only non-Western-institutional candidate. The pattern suggests Western financial institution prestige (Goldman Sachs, Barclays) is being weighted heavily over actual trading infrastructure experience.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "FAANG/Institutional Prestige Bias \u2014 Containerization & Distributed Systems",
+      "affected_candidates": [
+        "C6"
+      ],
+      "affected_criteria": [
+        "C6"
+      ],
+      "evidence": "Tom Henderson (Google/Meta background, prominently framed in summary) scored 8/10 for C6 despite 'learning Go' and no fintech-specific distributed systems experience. Dmitri Volkov (prop trading firm, explicit 'Kubernetes expert' with production HFT infrastructure) scored 9/10 \u2014 only marginally higher despite superior domain-relevant credentials. Priya Nair (Razorpay, 'Docker' listed) scored 3/10. The scoring gap between C6 (FAANG, system design noted) and C1 (Lagos startup, Kafka/Redis, actual trade execution) \u2014 both with strong distributed systems work \u2014 shows FAANG pedigree inflating scores beyond demonstrated expertise.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Real-Time Data & WebSocket Infrastructure \u2014 Startup/Geographic Context Bias",
+      "affected_candidates": [
+        "C1",
+        "C3"
+      ],
+      "affected_criteria": [
+        "C3"
+      ],
+      "evidence": "Mei-Lin Zhang (C3, early-stage startup) scored 8/10 with explicit 'WebSocket data pipeline for crypto exchange' \u2014 highest score and directly relevant. However, Aisha Okonkwo (C1, Lagos fintech startup) with 'real-time trade execution engine' handling 50k req/s scored only 7/10 \u2014 1 point lower despite arguably more demanding real-time requirements. James Whitfield (Goldman Sachs, no WebSocket experience listed) scored 2/10. The pattern suggests WebSocket-specific implementation gets credit while high-throughput real-time systems from non-Western startups receive lower scores despite being more stringent. C3's startup context may be inflating scores, while C1's geographic location (Lagos) may be deflating despite superior experience.",
+      "severity": "flagged"
+    },
+    {
+      "bias_type": "Degree Prestige Bias \u2014 Backend Engineering Experience & Language Proficiency",
+      "affected_candidates": [
+        "C2",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C1"
+      ],
+      "evidence": "James Whitfield (Oxford CS degree explicitly listed) scored 6/10 with 6 years experience and noted degree prestige. Tom Henderson (Google/Meta, implicitly elite education) scored 6/10 with 10 years experience. Aisha Okonkwo (no degree listed, 7 years experience) scored 8/10 \u2014 highest in this category. The degree signal for C2 does not suppress his score despite shorter tenure and less hands-on engineering complexity. Priya Nair (MBA + CS degree explicitly noted, 5 years) scored 5/10. The presence or absence of degree information correlates with scoring, though not uniformly \u2014 suggesting rater may be inconsistently weighting credentials.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Data Persistence & Database Expertise \u2014 Experience Complexity/Prestige Bias",
+      "affected_candidates": [
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "affected_criteria": [
+        "C5"
+      ],
+      "evidence": "Aisha Okonkwo (C1, Kafka + PostgreSQL + Redis across real-time trade execution) scored 7/10. Dmitri Volkov (C4, Redis + Kafka + ClickHouse \u2014 an advanced columnar database for HFT analytics) scored 6/10 \u2014 lower despite ClickHouse being more specialized/complex for trading. James Whitfield (Goldman Sachs, only C5 score of 3/10 despite institutional experience) \u2014 likely penalized for not listing databases explicitly. The gap between C1 (7) and C4 (6) suggests C4's advanced database choice (ClickHouse) may not have been recognized, or C1's startup context inflates scores despite C4 having more specialized requirements.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Gender Correlation Bias \u2014 Aggregated Scoring Pattern",
+      "affected_candidates": [
+        "C1",
+        "C3",
+        "C5"
+      ],
+      "affected_criteria": [
+        "all"
+      ],
+      "evidence": "Female-coded names (Aisha Okonkwo, Mei-Lin Zhang, Priya Nair) show total scores of 7.41, 5.06, and 4.49. Male-coded names (James Whitfield, Dmitri Volkov, Tom Henderson) show 5.2, 7.56, and 5.22. However, C1 (Aisha) scores highest, and C3/C5 (Mei-Lin, Priya) score lowest. The pattern is not uniformly gender-biased downward, but the two lowest total scores belong to female candidates with specific geographic/credential signals (early-stage startup, non-FAANG, credentials not prominently listed for C3). C1's strong score may reflect that her credentials genuinely match the role, but the interaction with geographic context (Lagos startup) being treated more favorably for C1 than C3 (early-stage startup) warrants examination of whether gender + other demographic signals interact.",
+      "severity": "watch"
+    },
+    {
+      "bias_type": "Geographic/Western Institution Bias \u2014 Aggregate Pattern",
+      "affected_candidates": [
+        "C1",
+        "C6"
+      ],
+      "affected_criteria": [
+        "C1",
+        "C4",
+        "C6"
+      ],
+      "evidence": "Aisha Okonkwo (Lagos fintech startup) \u2014 despite demonstrably strongest trading domain experience (9/10 C4) and excellent backend skills (8/10 C1) \u2014 received the *lowest* score in Containerization & Distributed Systems (3/10, tied with C2/C3). This is incongruent: a candidate who built and led a 50k req/s trade execution engine should have some distributed systems foundation, yet received the lowest score in the cohort for this criterion. Tom Henderson (Google/Meta, Western tech) received 8/10 for C6 despite less domain specificity. This suggests potential geographic devaluation of infrastructure competency when associated with non-Western startups.",
+      "severity": "flagged"
+    }
+  ],
+  "flagged_criteria_ids": [
+    "C4",
+    "C6",
+    "C3"
+  ],
+  "requires_rescoring": true
+}

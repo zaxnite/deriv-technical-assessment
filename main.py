@@ -5,19 +5,18 @@ Entry point for the recruitment screening pipeline.
 Run with:
     python main.py
 
-The pipeline runs all stages in strict order:
-    INIT → RUBRIC_GENERATED → RUBRIC_APPROVED → CANDIDATES_SCORED
-    → BIAS_AUDITED → [FLAGGED_RESCORING_COMPLETE] → RANKING_FINALISED
-    → SUMMARIES_GENERATED
+Each run creates a timestamped session directory:
+    artifacts/session_YYYYMMDD_HHMMSS/
 
-An interactive terminal checkpoint pauses at RUBRIC_APPROVED.
-The rubric rejection loop regenerates the rubric until approved.
+artifacts/latest/ always points to the most recent session,
+allowing validate.py to check the latest run without knowing the timestamp.
 """
 
 from __future__ import annotations
 
 import sys
 import os
+import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -35,62 +34,99 @@ from pipeline.stages import (
     stage_rescore_flagged,
     stage_finalise_ranking,
     stage_generate_summaries,
-    stage_generate_interview_questions,   
-    stage_generate_cohort_analysis,       
+    stage_generate_interview_questions,
+    stage_generate_cohort_analysis,
+    stage_counter_intuitive_pick,
+    stage_blind_reranking,
     RubricRejectedError,
 )
 
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-ARTIFACTS_DIR        = "artifacts"
+BASE_ARTIFACTS_DIR   = "artifacts"
 JOB_DESCRIPTION_PATH = "job_description.json"
 CANDIDATES_PATH      = "candidates.json"
 MAX_RUBRIC_RETRIES   = 3
 
 
-def print_banner() -> None:
+def create_session_dir() -> str:
+    """
+    Create a timestamped session directory under artifacts/.
+
+    Returns the path to the new session directory.
+
+    Structure:
+        artifacts/
+            session_20260508_182611/   <- this run
+            session_20260508_183045/   <- previous run
+            latest/                    <- always the most recent session
+    """
+    timestamp  = datetime.now().strftime("%Y%m%d_%H%M%S")
+    session_id = f"session_{timestamp}"
+    session_dir = Path(BASE_ARTIFACTS_DIR) / session_id
+    session_dir.mkdir(parents=True, exist_ok=True)
+    return str(session_dir)
+
+
+def update_latest_symlink(session_dir: str) -> None:
+    """
+    Make artifacts/latest/ point to the most recent session.
+
+    On Windows, creates a real directory copy since symlinks require
+    elevated permissions. On Unix, creates a proper symlink.
+    """
+    latest_path = Path(BASE_ARTIFACTS_DIR) / "latest"
+
+    # Remove existing latest
+    if latest_path.exists():
+        if latest_path.is_symlink():
+            latest_path.unlink()
+        elif latest_path.is_dir():
+            shutil.rmtree(latest_path)
+
+    session_path = Path(session_dir)
+
+    try:
+        # Try symlink first (works on Unix and Windows with dev mode)
+        latest_path.symlink_to(session_path.resolve(), target_is_directory=True)
+        print(f"  ✅  Session symlinked to: {latest_path}")
+    except (OSError, NotImplementedError):
+        # Windows fallback — copy the directory
+        # Will be refreshed at end of run when all artifacts are written
+        # Store the session path in a pointer file for validate.py
+        pointer_path = Path(BASE_ARTIFACTS_DIR) / "latest_session.txt"
+        pointer_path.write_text(str(session_path.resolve()), encoding="utf-8")
+        print(f"  ✅  Session pointer written to: {pointer_path}")
+
+
+def print_banner(session_dir: str) -> None:
     print(f"\n{'#'*60}")
     print(f"  DERIV — AI RECRUITMENT SCREENING PIPELINE")
     print(f"  Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"  Session: {session_dir}")
     print(f"{'#'*60}")
 
 
-def print_complete() -> None:
+def print_complete(session_dir: str) -> None:
     print(f"\n{'#'*60}")
     print(f"  PIPELINE COMPLETE")
-    print(f"  Artifacts written to: {ARTIFACTS_DIR}/")
+    print(f"  Session artifacts: {session_dir}/")
+    print(f"  Latest artifacts:  {BASE_ARTIFACTS_DIR}/latest/")
     print(f"  Run validation with: python validate.py")
     print(f"{'#'*60}\n")
 
 
-# ---------------------------------------------------------------------------
-# Main pipeline orchestration
-# ---------------------------------------------------------------------------
-
 def run_pipeline() -> None:
-    """
-    Orchestrate all pipeline stages in strict order.
+    """Orchestrate all pipeline stages in strict order."""
 
-    Raises
-    ------
-    SystemExit on unrecoverable errors.
-    """
-    print_banner()
+    # Create session directory for this run
+    session_dir = create_session_dir()
 
-    # Initialise shared dependencies
-    os.makedirs(ARTIFACTS_DIR, exist_ok=True)
-    state  = PipelineState(artifacts_dir=ARTIFACTS_DIR)
-    logger = LLMCallLogger(
-        log_path=Path(ARTIFACTS_DIR) / "llm_calls.jsonl"
-    )
-    state.llm_calls_path = str(Path(ARTIFACTS_DIR) / "llm_calls.jsonl")
+    print_banner(session_dir)
 
-    # ----------------------------------------------------------------
-    # STAGE 1: INIT — load inputs
-    # ----------------------------------------------------------------
+    state  = PipelineState(artifacts_dir=session_dir)
+    logger = LLMCallLogger(log_path=Path(session_dir) / "llm_calls.jsonl")
+    state.llm_calls_path = str(Path(session_dir) / "llm_calls.jsonl")
+
+    # STAGE 1: INIT
     try:
         job_description, candidates = stage_init(
             state=state,
@@ -101,35 +137,21 @@ def run_pipeline() -> None:
         print(f"\n  ❌  INIT failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
     # STAGE 2 + 3: RUBRIC_GENERATED + RUBRIC_APPROVED
-    # Retry loop — operator may reject and regenerate up to MAX_RUBRIC_RETRIES
-    # ----------------------------------------------------------------
     approved_rubric = None
     for attempt in range(1, MAX_RUBRIC_RETRIES + 1):
         if attempt > 1:
             print(f"\n  Regenerating rubric (attempt {attempt}/{MAX_RUBRIC_RETRIES})...")
-            # Reset state back to INIT for retry
             state.current_stage = PipelineStage.INIT
 
         try:
-            draft_rubric = stage_generate_rubric(
-                state=state,
-                job_description=job_description,
-                logger=logger,
-            )
-            approved_rubric = stage_approve_rubric(
-                state=state,
-                rubric=draft_rubric,
-            )
-            break  # Approved — exit retry loop
-
+            draft_rubric    = stage_generate_rubric(state, job_description, logger)
+            approved_rubric = stage_approve_rubric(state, draft_rubric)
+            break
         except RubricRejectedError:
             if attempt == MAX_RUBRIC_RETRIES:
                 print(f"\n  ❌  Rubric rejected {MAX_RUBRIC_RETRIES} times. Exiting.")
                 sys.exit(1)
-            # Continue loop to regenerate
-
         except RuntimeError as e:
             print(f"\n  ❌  Rubric generation failed: {e}")
             sys.exit(1)
@@ -138,124 +160,93 @@ def run_pipeline() -> None:
         print("\n  ❌  No approved rubric — cannot continue.")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
     # STAGE 4: CANDIDATES_SCORED
-    # ----------------------------------------------------------------
     try:
-        scores_data = stage_score_candidates(
-            state=state,
-            candidates=candidates,
-            rubric=approved_rubric,
-            logger=logger,
-        )
+        scores_data = stage_score_candidates(state, candidates, approved_rubric, logger)
     except RuntimeError as e:
         print(f"\n  ❌  Candidate scoring failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
     # STAGE 5: BIAS_AUDITED
-    # ----------------------------------------------------------------
     try:
         audit_data = stage_audit_bias(
-            state=state,
-            candidates=candidates,
-            rubric=approved_rubric,
-            scores_data=scores_data,
-            logger=logger,
+            state, candidates, approved_rubric, scores_data, logger
         )
     except RuntimeError as e:
         print(f"\n  ❌  Bias audit failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
-    # STAGE 6: FLAGGED_RESCORING_COMPLETE (conditional)
-    # Only runs if the bias audit found flagged severity findings
-    # ----------------------------------------------------------------
+    # STAGE 6: FLAGGED_RESCORING (conditional)
     if state.rescoring_required:
         try:
             scores_data = stage_rescore_flagged(
-                state=state,
-                candidates=candidates,
-                rubric=approved_rubric,
-                scores_data=scores_data,
-                audit_data=audit_data,
-                logger=logger,
+                state, candidates, approved_rubric, scores_data, audit_data, logger
             )
         except RuntimeError as e:
             print(f"\n  ❌  Re-scoring failed: {e}")
             sys.exit(1)
 
-    # ----------------------------------------------------------------
-    # STAGE 7: RANKING_FINALISED
-    # Hard-gated by assert_bias_audit_complete()
-    # ----------------------------------------------------------------
+    # STAGE 7: RANKING_FINALISED (hard-gated)
     try:
-        ranking = stage_finalise_ranking(
-            state=state,
-            scores_data=scores_data,
-        )
+        ranking = stage_finalise_ranking(state, scores_data)
     except RuntimeError as e:
         print(f"\n  ❌  Ranking failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
     # STAGE 8: SUMMARIES_GENERATED
-    # ----------------------------------------------------------------
     try:
         stage_generate_summaries(
-            state=state,
-            candidates=candidates,
-            rubric=approved_rubric,
-            scores_data=scores_data,
-            job_description=job_description,
-            ranking=ranking,
-            logger=logger,
+            state, candidates, approved_rubric,
+            scores_data, job_description, ranking, logger
         )
     except RuntimeError as e:
         print(f"\n  ❌  Summary generation failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
-    # STAGE 9: INTERVIEW QUESTIONS (Task 6 — Should Attempt)
-    # ----------------------------------------------------------------
+    # STAGE 9: INTERVIEW QUESTIONS (Task 6)
     try:
-        from pipeline.stages import stage_generate_interview_questions
         stage_generate_interview_questions(
-            state=state,
-            candidates=candidates,
-            scores_data=scores_data,
-            rubric=approved_rubric,
-            job_description=job_description,
-            ranking=ranking,
-            logger=logger,
+            state, candidates, scores_data,
+            approved_rubric, job_description, ranking, logger
         )
     except RuntimeError as e:
         print(f"\n  ❌  Interview question generation failed: {e}")
         sys.exit(1)
 
-    # ----------------------------------------------------------------
-    # STAGE 10: COHORT ANALYSIS (Task 7 — Should Attempt)
-    # ----------------------------------------------------------------
+    # STAGE 10: COHORT ANALYSIS (Task 7)
     try:
-        from pipeline.stages import stage_generate_cohort_analysis
         stage_generate_cohort_analysis(
-            state=state,
-            candidates=candidates,
-            rubric=approved_rubric,
-            job_description=job_description,
-            ranking=ranking,
-            scores_data=scores_data,
-            logger=logger,
+            state, candidates, approved_rubric,
+            job_description, ranking, scores_data, logger
         )
     except RuntimeError as e:
         print(f"\n  ❌  Cohort analysis generation failed: {e}")
         sys.exit(1)
 
-    print_complete()
+    # STAGE 11: COUNTER-INTUITIVE PICK (Stretch 8)
+    try:
+        stage_counter_intuitive_pick(
+            state, candidates, approved_rubric,
+            job_description, ranking, scores_data, logger
+        )
+    except RuntimeError as e:
+        print(f"\n  ❌  Counter-intuitive pick failed: {e}")
+        sys.exit(1)
 
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
+    # STAGE 12: BLIND RE-RANKING (Stretch 9)
+    try:
+        stage_blind_reranking(
+            state, candidates, approved_rubric, job_description, ranking, logger
+        )
+    except RuntimeError as e:
+        print(f"\n  ❌  Blind re-ranking failed: {e}")
+        sys.exit(1)
+
+    # Update latest pointer after all artifacts are written
+    update_latest_symlink(session_dir)
+
+    print_complete(session_dir)
+
 
 if __name__ == "__main__":
     run_pipeline()

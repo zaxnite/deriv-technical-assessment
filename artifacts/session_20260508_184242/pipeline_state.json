@@ -1,0 +1,13 @@
+{
+  "current_stage": "SUMMARIES_GENERATED",
+  "started_at": "2026-05-08T14:42:42.678470+00:00",
+  "artifacts_dir": "artifacts\\session_20260508_184242",
+  "rubric_path": "artifacts\\session_20260508_184242\\scoring_rubric.json",
+  "scores_path": "artifacts\\session_20260508_184242\\candidate_scores.json",
+  "bias_audit_path": "artifacts\\session_20260508_184242\\bias_audit.json",
+  "hiring_summaries_path": "artifacts\\session_20260508_184242\\hiring_summaries.md",
+  "llm_calls_path": "artifacts\\session_20260508_184242\\llm_calls.jsonl",
+  "bias_flags_found": true,
+  "rescoring_required": true,
+  "current_stage_int": 7
+}
